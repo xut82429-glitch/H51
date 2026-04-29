@@ -1,279 +1,354 @@
-// ===== 网络安全知识竞赛题库 =====
-const questionBank = [
-    {
-        category: "网络安全法",
-        question: "根据《网络安全法》，网络运营者应当对其收集的用户信息严格保密，并建立健全用户信息（ ）制度。",
-        options: ["保护", "保密", "使用", "保存"],
-        answer: 0,
-        explanation: "《网络安全法》第四十二条规定，网络运营者应当采取措施确保其收集的个人信息安全，建立健全用户信息保护制度。"
-    },
-    {
-        category: "网络安全法",
-        question: "违反《网络安全法》第四十四条规定，窃取或者以其他非法方式获取、非法出售或者非法向他人提供个人信息，尚不构成犯罪的，由公安机关没收违法所得，并处违法所得（ ）以上（ ）以下罚款。",
-        options: ["一倍、十倍", "一倍、五倍", "二倍、十倍", "五倍、十倍"],
-        answer: 0,
-        explanation: "根据《网络安全法》第六十四条规定，窃取或非法获取个人信息的，处违法所得一倍以上十倍以下罚款。"
-    },
-    {
-        category: "网络安全法",
-        question: "《网络安全法》自（ ）起施行。",
-        options: ["2017年6月1日", "2017年1月1日", "2016年11月7日", "2017年7月1日"],
-        answer: 0,
-        explanation: "《中华人民共和国网络安全法》于2016年11月7日通过，自2017年6月1日起施行。"
-    },
-    {
-        category: "网络安全法",
-        question: "关键信息基础设施的运营者应当设置专门安全管理机构，并对重要系统和数据库进行（ ）。",
-        options: ["备份", "加密", "容灾备份", "隔离"],
-        answer: 2,
-        explanation: "《网络安全法》第三十四条规定，关键信息基础设施运营者应当对重要系统和数据库进行容灾备份。"
-    },
-    {
-        category: "网络安全法",
-        question: "网络产品、服务应当符合相关国家标准的（ ）。",
-        options: ["强制性要求", "推荐性要求", "一般性要求", "特殊性要求"],
-        answer: 0,
-        explanation: "《网络安全法》第二十二条规定，网络产品、服务应当符合相关国家标准的强制性要求。"
-    },
-    {
-        category: "个人信息保护",
-        question: "《个人信息保护法》规定，处理个人信息应当具有明确、合理的目的，并应当与处理目的直接相关，采取对个人权益影响最小的方式。这体现了（ ）原则。",
-        options: ["最小必要", "公开透明", "目的明确", "合法正当"],
-        answer: 0,
-        explanation: "最小必要原则要求收集个人信息应当限于实现处理目的的最小范围，不得过度收集。"
-    },
-    {
-        category: "个人信息保护",
-        question: "个人信息处理者在处理个人信息前，应当以显著方式、清晰易懂的语言真实、准确、完整地向个人告知相关事项，这体现了（ ）原则。",
-        options: ["公开透明", "合法正当", "最小必要", "目的明确"],
-        answer: 0,
-        explanation: "公开透明原则要求个人信息处理者应当以显著方式、清晰易懂的语言向个人告知相关信息。"
-    },
-    {
-        category: "个人信息保护",
-        question: "以下哪项不属于敏感个人信息？",
-        options: ["姓名", "生物识别", "宗教信仰", "医疗健康"],
-        answer: 0,
-        explanation: "敏感个人信息包括生物识别、宗教信仰、特定身份、医疗健康、金融账户、行踪轨迹等，姓名属于一般个人信息。"
-    },
-    {
-        category: "个人信息保护",
-        question: "个人信息保护法自（ ）起施行。",
-        options: ["2021年11月1日", "2021年1月1日", "2022年1月1日", "2021年6月1日"],
-        answer: 0,
-        explanation: "《中华人民共和国个人信息保护法》于2021年8月20日通过，自2021年11月1日起施行。"
-    },
-    {
-        category: "个人信息保护",
-        question: "处理个人信息应当遵循合法、正当、必要和诚信原则，不得通过误导、欺诈、胁迫等方式处理个人信息，这体现了（ ）原则。",
-        options: ["合法正当", "最小必要", "公开透明", "目的明确"],
-        answer: 0,
-        explanation: "合法正当原则要求处理个人信息应当遵循合法、正当、必要和诚信原则。"
-    },
-    {
-        category: "数据安全",
-        question: "《数据安全法》自（ ）起施行。",
-        options: ["2021年9月1日", "2021年6月10日", "2022年1月1日", "2021年11月1日"],
-        answer: 0,
-        explanation: "《中华人民共和国数据安全法》于2021年6月10日通过，自2021年9月1日起施行。"
-    },
-    {
-        category: "数据安全",
-        question: "国家建立数据分类分级保护制度，根据数据在经济社会发展中的重要程度，对数据实行（ ）。",
-        options: ["分类分级保护", "统一保护", "重点保护", "全面保护"],
-        answer: 0,
-        explanation: "《数据安全法》第二十一条规定，国家建立数据分类分级保护制度。"
-    },
-    {
-        category: "防范网络诈骗",
-        question: "收到自称是银行客服的电话，说你的银行卡存在风险，需要提供验证码进行验证，你应该怎么做？",
-        options: ["立即提供验证码", "挂断电话，拨打银行官方客服核实", "按照对方指示操作", "告诉对方银行卡密码"],
-        answer: 1,
-        explanation: "正规银行不会通过电话索要验证码，接到此类电话应挂断后拨打银行官方客服核实。"
-    },
-    {
-        category: "防范网络诈骗",
-        question: "在网上购物时，卖家说平台手续费太高，要求私下转账交易，你应该怎么做？",
-        options: ["同意私下转账，可以省钱", "拒绝，坚持通过平台交易", "先转一半试试", "让卖家先发货再转账"],
-        answer: 1,
-        explanation: "私下交易无法获得平台保障，一旦出现问题难以维权，应坚持通过正规平台交易。"
-    },
-    {
-        category: "防范网络诈骗",
-        question: "收到中奖短信，要求先缴纳手续费才能领奖，这属于什么行为？",
-        options: ["正常领奖流程", "网络诈骗", "营销活动", "抽奖活动"],
-        answer: 1,
-        explanation: "要求先缴费再领奖是典型的网络诈骗手段，正规中奖不会要求中奖者预先缴纳任何费用。"
-    },
-    {
-        category: "防范网络诈骗",
-        question: "以下哪种行为可能是网络诈骗？",
-        options: ["官方平台的促销活动", "陌生人发送的高收益投资链接", "正规电商的打折活动", "银行官方的理财推荐"],
-        answer: 1,
-        explanation: "陌生人发送的高收益投资链接很可能是诈骗，应警惕'高收益、零风险'的投资承诺。"
-    },
-    {
-        category: "防范网络诈骗",
-        question: "接到自称是公检法的电话，说你涉嫌犯罪需要将资金转入'安全账户'，你应该怎么做？",
-        options: ["立即转账到安全账户", "挂断电话并报警", "按照对方要求操作", "先转一部分试试"],
-        answer: 1,
-        explanation: "公检法机关不会通过电话要求转账到所谓'安全账户'，这是典型的冒充公检法诈骗。"
-    },
-    {
-        category: "密码安全",
-        question: "以下哪种密码最安全？",
-        options: ["123456", "password", "生日日期", "包含大小写字母、数字和特殊符号的组合"],
-        answer: 3,
-        explanation: "强密码应包含大小写字母、数字和特殊符号的组合，长度至少8位以上。"
-    },
-    {
-        category: "密码安全",
-        question: "关于密码使用，以下做法正确的是？",
-        options: ["所有账号使用同一个密码", "定期更换密码", "将密码写在便签贴在显示器上", "使用生日作为密码"],
-        answer: 1,
-        explanation: "定期更换密码是良好的安全习惯，可以降低密码泄露带来的风险。"
-    },
-    {
-        category: "密码安全",
-        question: "收到短信称你的网银密码即将过期，需要点击链接修改密码，正确的做法是？",
-        options: ["点击链接修改密码", "拨打银行官方客服核实", "转发给朋友提醒", "忽略短信"],
-        answer: 1,
-        explanation: "不要点击不明链接，应通过官方渠道核实信息真伪。"
-    },
-    {
-        category: "网络安全意识",
-        question: "在公共场所使用免费WiFi时，以下哪种做法最安全？",
-        options: ["随意连接免费WiFi", "使用VPN加密连接", "进行网上银行交易", "登录重要账号"],
-        answer: 1,
-        explanation: "公共WiFi存在安全风险，使用VPN可以加密网络连接，保护数据安全。"
-    },
-    {
-        category: "网络安全意识",
-        question: "收到好友发来的借钱信息，正确的做法是？",
-        options: ["立即转账", "电话核实身份后再决定", "让对方发语音确认", "先转一部分试试"],
-        answer: 1,
-        explanation: "应通过电话或其他方式核实对方身份，防止账号被盗用实施诈骗。"
-    },
-    {
-        category: "网络安全意识",
-        question: "在网上发布个人信息时，以下哪种做法最安全？",
-        options: ["公开分享所有个人信息", "只分享必要的信息", "使用真实姓名作为网名", "分享家庭住址"],
-        answer: 1,
-        explanation: "在网上应尽量减少个人信息的公开，只分享必要的信息。"
-    },
-    {
-        category: "网络安全意识",
-        question: "发现电脑可能感染了病毒，应该怎么做？",
-        options: ["继续使用", "立即断网并使用杀毒软件扫描", "重装系统", "拔掉电源"],
-        answer: 1,
-        explanation: "发现病毒感染应立即断网防止扩散，然后使用杀毒软件进行全面扫描。"
-    },
-    {
-        category: "网络安全意识",
-        question: "以下哪种行为可能导致个人信息泄露？",
-        options: ["使用正规软件", "随意扫描不明二维码", "定期更新系统", "使用官方应用商店"],
-        answer: 1,
-        explanation: "随意扫描不明二维码可能导致恶意软件安装或钓鱼网站访问，造成信息泄露。"
-    },
-    {
-        category: "青少年保护",
-        question: "小丽在网上认识了一个网友，对方约她见面，她应该怎么做？",
-        options: ["独自前往见面", "告诉家长或老师，在大人陪同下见面", "带上朋友一起去", "不去见面"],
-        answer: 1,
-        explanation: "未成年人应在家长或老师的陪同下与网友见面，确保人身安全。"
-    },
-    {
-        category: "青少年保护",
-        question: "在网上遇到陌生人发送不良信息，应该怎么做？",
-        options: ["回复对方", "举报并拉黑", "转发给朋友", "忽略"],
-        answer: 1,
-        explanation: "遇到不良信息应及时举报并拉黑，保护自己免受侵害。"
-    },
-    {
-        category: "青少年保护",
-        question: "沉迷网络游戏可能带来哪些危害？",
-        options: ["影响学习成绩", "损害身体健康", "导致社交障碍", "以上都是"],
-        answer: 3,
-        explanation: "沉迷网络游戏会影响学习、损害身体健康、导致社交障碍等多方面危害。"
-    },
-    {
-        category: "青少年保护",
-        question: "在网上看到不实信息，正确的做法是？",
-        options: ["转发让更多人知道", "不传播，向平台举报", "评论区反驳", "保存下来"],
-        answer: 1,
-        explanation: "不应传播不实信息，应向平台举报，维护网络环境。"
-    },
-    {
-        category: "青少年保护",
-        question: "为了保护个人隐私，在网上应该怎么做？",
-        options: ["随意添加陌生人为好友", "不轻易透露真实姓名、住址等信息", "使用真实照片作为头像", "分享日常行踪"],
-        answer: 1,
-        explanation: "在网上应保护个人隐私，不轻易透露真实姓名、住址、学校等敏感信息。"
-    },
-    {
-        category: "数据出境",
-        question: "以下哪项说法是错误的？",
-        options: ["个人信息和重要数据的出境安全评估是维护数据跨境流动安全的重要手段", "国家机关不可以在中华人民共和国境外存储中华人民共和国公民个人信息", "任何组织、个人不得非法收集、使用、加工、传输他人个人信息", "网信部门负责统筹协调网络数据安全和相关监管工作"],
-        answer: 1,
-        explanation: "根据《个人信息保护法》，国家机关处理个人信息也需要遵守相关规定，但并未完全禁止境外存储。"
-    },
-    {
-        category: "数据出境",
-        question: "因业务等需要，确需向中华人民共和国境外提供个人信息的，应当具备下列哪些条件之一？",
-        options: ["经过专业认证", "通过国家网信部门组织的数据出境安全评估", "按照国家网信部门的规定经专业机构进行个人信息保护认证", "以上都是"],
-        answer: 3,
-        explanation: "《个人信息保护法》第三十八条规定了个人信息出境的条件，包括安全评估、认证等方式。"
-    },
-    {
-        category: "数据出境",
-        question: "个人信息处理者向中华人民共和国境外提供个人信息的，不需要向个人告知以下哪项事项？",
-        options: ["境外接收方的姓名或者名称", "个人向境外接收方行使权利的方式和程序", "境外接收方的联系方式", "境外接收方处理个人信息的目的"],
-        answer: 2,
-        explanation: "法律要求告知境外接收方名称、处理目的、方式、信息种类等，但联系方式不是必须告知的内容。"
-    },
-    {
-        category: "数据出境",
-        question: "数据安全法对数据出境主要规定了以下哪些内容？",
-        options: ["数据分类分级管理", "对等采取措施", "数据安全审查", "以上都是"],
-        answer: 3,
-        explanation: "《数据安全法》对数据出境规定了分类分级管理、对等措施、安全审查等多方面内容。"
-    },
-    {
-        category: "数据出境",
-        question: "《网络安全法》规定，关键信息基础设施的运营者在中华人民共和国境内运营中收集和产生的重要数据的出境安全管理，适用（ ）的规定。",
-        options: ["《数据安全法》", "《个人信息保护法》", "《网络安全法》", "《国家安全法》"],
-        answer: 2,
-        explanation: "《网络安全法》第三十七条规定了关键信息基础设施运营者数据出境的安全管理要求。"
-    }
-];
+// ===== 游戏配置 =====
+const CONFIG = {
+    maxLives: 5,
+    baseHP: 100,
+    timePerQuestion: 20,
+    levels: [
+        {
+            id: 1,
+            name: "病毒入侵",
+            icon: "🦠",
+            description: "初级病毒正在入侵系统！",
+            enemies: [
+                { name: "蠕虫病毒", icon: "🐛", hp: 40, attack: 10 },
+                { name: "木马程序", icon: "🐴", hp: 50, attack: 12 },
+                { name: "广告弹窗", icon: "📢", hp: 30, attack: 8 }
+            ],
+            boss: { name: "病毒首领", icon: "👾", hp: 80, attack: 15 },
+            reward: { coins: 50, exp: 100, items: ["hint"] }
+        },
+        {
+            id: 2,
+            name: "钓鱼陷阱",
+            icon: "🎣",
+            description: "钓鱼网站设下陷阱！",
+            enemies: [
+                { name: "钓鱼邮件", icon: "📧", hp: 50, attack: 12 },
+                { name: "假网站", icon: "🌐", hp: 60, attack: 14 },
+                { name: "诈骗短信", icon: "💬", hp: 45, attack: 11 }
+            ],
+            boss: { name: "钓鱼大师", icon: "🎣", hp: 100, attack: 18 },
+            reward: { coins: 80, exp: 150, items: ["shield"] }
+        },
+        {
+            id: 3,
+            name: "数据危机",
+            icon: "💾",
+            description: "数据泄露危机爆发！",
+            enemies: [
+                { name: "数据窃贼", icon: "🥷", hp: 60, attack: 15 },
+                { name: "间谍软件", icon: "👁️", hp: 70, attack: 16 },
+                { name: "黑客工具", icon: "🔧", hp: 55, attack: 14 }
+            ],
+            boss: { name: "数据大盗", icon: "💀", hp: 120, attack: 20 },
+            reward: { coins: 100, exp: 200, items: ["time", "attack"] }
+        },
+        {
+            id: 4,
+            name: "暗网迷踪",
+            icon: "🕸️",
+            description: "深入暗网追踪真相！",
+            enemies: [
+                { name: "暗网商贩", icon: "🏪", hp: 75, attack: 18 },
+                { name: "信息贩子", icon: "📊", hp: 80, attack: 19 },
+                { name: "洗钱团伙", icon: "💰", hp: 70, attack: 17 }
+            ],
+            boss: { name: "暗网领主", icon: "🕸️", hp: 150, attack: 22 },
+            reward: { coins: 120, exp: 250, items: ["shield", "hint"] }
+        },
+        {
+            id: 5,
+            name: "终极对决",
+            icon: "🏰",
+            description: "与终极BOSS决战！",
+            enemies: [
+                { name: "APT攻击", icon: "🎯", hp: 90, attack: 20 },
+                { name: "勒索病毒", icon: "🔒", hp: 100, attack: 22 },
+                { name: "零日漏洞", icon: "⚡", hp: 85, attack: 19 }
+            ],
+            boss: { name: "黑客之王", icon: "👑", hp: 200, attack: 25 },
+            reward: { coins: 200, exp: 500, items: ["attack", "shield", "hint"] }
+        }
+    ]
+};
+
+// ===== 题库 =====
+const QUESTIONS = {
+    "网络安全法": [
+        {
+            question: "《网络安全法》自何时起施行？",
+            options: ["2017年6月1日", "2017年1月1日", "2016年11月7日", "2017年7月1日"],
+            answer: 0,
+            explanation: "《网络安全法》于2016年11月7日通过，自2017年6月1日起施行。"
+        },
+        {
+            question: "网络运营者应当对其收集的用户信息严格保密，并建立健全用户信息什么制度？",
+            options: ["保护", "保密", "使用", "保存"],
+            answer: 0,
+            explanation: "网络运营者应当建立健全用户信息保护制度。"
+        },
+        {
+            question: "关键信息基础设施的运营者应当对重要系统和数据库进行什么？",
+            options: ["备份", "加密", "容灾备份", "隔离"],
+            answer: 2,
+            explanation: "关键信息基础设施运营者应当对重要系统和数据库进行容灾备份。"
+        },
+        {
+            question: "网络产品、服务应当符合相关国家标准的什么要求？",
+            options: ["强制性要求", "推荐性要求", "一般性要求", "特殊性要求"],
+            answer: 0,
+            explanation: "网络产品、服务应当符合相关国家标准的强制性要求。"
+        },
+        {
+            question: "窃取或非法获取个人信息的，处违法所得几倍以上几倍以下罚款？",
+            options: ["一倍、十倍", "一倍、五倍", "二倍、十倍", "五倍、十倍"],
+            answer: 0,
+            explanation: "窃取或非法获取个人信息的，处违法所得一倍以上十倍以下罚款。"
+        }
+    ],
+    "个人信息保护": [
+        {
+            question: "《个人信息保护法》自何时起施行？",
+            options: ["2021年11月1日", "2021年1月1日", "2022年1月1日", "2021年6月1日"],
+            answer: 0,
+            explanation: "《个人信息保护法》于2021年8月20日通过，自2021年11月1日起施行。"
+        },
+        {
+            question: "处理个人信息应当具有明确、合理的目的，这体现了什么原则？",
+            options: ["最小必要", "公开透明", "目的明确", "合法正当"],
+            answer: 0,
+            explanation: "最小必要原则要求收集个人信息应当限于实现处理目的的最小范围。"
+        },
+        {
+            question: "以下哪项不属于敏感个人信息？",
+            options: ["姓名", "生物识别", "宗教信仰", "医疗健康"],
+            answer: 0,
+            explanation: "姓名属于一般个人信息，敏感信息包括生物识别、宗教信仰等。"
+        },
+        {
+            question: "个人信息处理者应以什么方式向个人告知相关事项？",
+            options: ["口头通知", "显著方式、清晰易懂的语言", "短信通知", "邮件通知"],
+            answer: 1,
+            explanation: "个人信息处理者应以显著方式、清晰易懂的语言向个人告知。"
+        },
+        {
+            question: "处理个人信息应遵循什么原则？",
+            options: ["效率优先", "合法、正当、必要和诚信", "利益最大化", "用户自愿"],
+            answer: 1,
+            explanation: "处理个人信息应遵循合法、正当、必要和诚信原则。"
+        }
+    ],
+    "数据安全": [
+        {
+            question: "《数据安全法》自何时起施行？",
+            options: ["2021年9月1日", "2021年6月10日", "2022年1月1日", "2021年11月1日"],
+            answer: 0,
+            explanation: "《数据安全法》于2021年6月10日通过，自2021年9月1日起施行。"
+        },
+        {
+            question: "国家建立什么制度来保护数据？",
+            options: ["统一保护制度", "数据分类分级保护制度", "重点保护制度", "全面保护制度"],
+            answer: 1,
+            explanation: "国家建立数据分类分级保护制度。"
+        },
+        {
+            question: "数据出境安全管理主要由哪个法律规范？",
+            options: ["《刑法》", "《民法典》", "《网络安全法》", "《劳动法》"],
+            answer: 2,
+            explanation: "《网络安全法》第三十七条规定了数据出境的安全管理要求。"
+        },
+        {
+            question: "个人信息出境需要通过什么评估？",
+            options: ["财务评估", "数据出境安全评估", "技术评估", "法律评估"],
+            answer: 1,
+            explanation: "个人信息出境需要通过国家网信部门组织的数据出境安全评估。"
+        },
+        {
+            question: "哪类运营者的数据出境适用《网络安全法》规定？",
+            options: ["所有企业", "外资企业", "关键信息基础设施运营者", "上市公司"],
+            answer: 2,
+            explanation: "关键信息基础设施运营者的数据出境适用《网络安全法》规定。"
+        }
+    ],
+    "防范诈骗": [
+        {
+            question: "接到自称银行客服索要验证码的电话，应该怎么做？",
+            options: ["立即提供", "挂断电话，拨打官方客服核实", "按指示操作", "告诉密码"],
+            answer: 1,
+            explanation: "正规银行不会通过电话索要验证码，应挂断后拨打官方客服核实。"
+        },
+        {
+            question: "卖家要求私下转账交易，应该怎么做？",
+            options: ["同意私下转账", "拒绝，坚持通过平台交易", "先转一半", "让卖家先发货"],
+            answer: 1,
+            explanation: "私下交易无法获得平台保障，应坚持通过正规平台交易。"
+        },
+        {
+            question: "收到中奖短信要求先缴手续费，这属于什么？",
+            options: ["正常流程", "网络诈骗", "营销活动", "抽奖活动"],
+            answer: 1,
+            explanation: "要求先缴费再领奖是典型的网络诈骗手段。"
+        },
+        {
+            question: "接到'公检法'电话要求转账到'安全账户'，应该怎么做？",
+            options: ["立即转账", "挂断电话并报警", "按要求操作", "先转一部分"],
+            answer: 1,
+            explanation: "公检法机关不会通过电话要求转账到所谓'安全账户'。"
+        },
+        {
+            question: "陌生人发送的高收益投资链接可能是？",
+            options: ["正规投资", "网络诈骗", "理财推荐", "银行产品"],
+            answer: 1,
+            explanation: "陌生人发送的高收益投资链接很可能是诈骗。"
+        }
+    ],
+    "密码安全": [
+        {
+            question: "以下哪种密码最安全？",
+            options: ["123456", "password", "生日日期", "大小写字母+数字+特殊符号"],
+            answer: 3,
+            explanation: "强密码应包含大小写字母、数字和特殊符号的组合。"
+        },
+        {
+            question: "关于密码使用，以下做法正确的是？",
+            options: ["所有账号同密码", "定期更换密码", "密码写在便签上", "使用生日作密码"],
+            answer: 1,
+            explanation: "定期更换密码是良好的安全习惯。"
+        },
+        {
+            question: "收到短信称网银密码过期需要点击链接修改，正确做法是？",
+            options: ["点击链接", "拨打官方客服核实", "转发提醒朋友", "忽略短信"],
+            answer: 1,
+            explanation: "不要点击不明链接，应通过官方渠道核实。"
+        },
+        {
+            question: "以下哪个是安全的密码习惯？",
+            options: ["长期不更换密码", "密码包含个人信息", "使用密码管理器", "所有平台同一密码"],
+            answer: 2,
+            explanation: "使用密码管理器是安全的密码习惯。"
+        },
+        {
+            question: "两步验证的作用是什么？",
+            options: ["加快登录速度", "增加账户安全性", "记住密码", "自动登录"],
+            answer: 1,
+            explanation: "两步验证可以增加账户安全性。"
+        }
+    ],
+    "网络安全意识": [
+        {
+            question: "使用公共WiFi时，以下哪种做法最安全？",
+            options: ["随意连接", "使用VPN加密", "进行网银交易", "登录重要账号"],
+            answer: 1,
+            explanation: "使用VPN可以加密网络连接，保护数据安全。"
+        },
+        {
+            question: "收到好友借钱信息，正确做法是？",
+            options: ["立即转账", "电话核实身份", "让对方发语音", "先转一部分"],
+            answer: 1,
+            explanation: "应通过电话核实对方身份，防止账号被盗用诈骗。"
+        },
+        {
+            question: "在网上发布个人信息时，哪种做法最安全？",
+            options: ["公开所有信息", "只分享必要信息", "用真实姓名作网名", "分享家庭住址"],
+            answer: 1,
+            explanation: "在网上应尽量减少个人信息的公开。"
+        },
+        {
+            question: "发现电脑感染病毒应该怎么做？",
+            options: ["继续使用", "断网并杀毒扫描", "重装系统", "拔掉电源"],
+            answer: 1,
+            explanation: "发现病毒感染应立即断网，然后使用杀毒软件扫描。"
+        },
+        {
+            question: "随意扫描不明二维码可能导致什么？",
+            options: ["获得优惠", "个人信息泄露", "中奖", "无影响"],
+            answer: 1,
+            explanation: "随意扫描不明二维码可能导致恶意软件安装或钓鱼访问。"
+        }
+    ],
+    "青少年保护": [
+        {
+            question: "网友约未成年人见面，正确做法是？",
+            options: ["独自前往", "告诉家长，在大人陪同下见面", "带朋友去", "不去见面"],
+            answer: 1,
+            explanation: "未成年人应在家长陪同下与网友见面，确保安全。"
+        },
+        {
+            question: "在网上遇到不良信息应该怎么做？",
+            options: ["回复对方", "举报并拉黑", "转发给朋友", "忽略"],
+            answer: 1,
+            explanation: "遇到不良信息应及时举报并拉黑。"
+        },
+        {
+            question: "沉迷网络游戏可能带来哪些危害？",
+            options: ["影响学习", "损害健康", "社交障碍", "以上都是"],
+            answer: 3,
+            explanation: "沉迷游戏会影响学习、损害健康、导致社交障碍等。"
+        },
+        {
+            question: "在网上看到不实信息，正确做法是？",
+            options: ["转发传播", "不传播，向平台举报", "评论反驳", "保存下来"],
+            answer: 1,
+            explanation: "不应传播不实信息，应向平台举报。"
+        },
+        {
+            question: "为保护隐私，在网上应该怎么做？",
+            options: ["随意加好友", "不透露真实姓名住址", "用真实照片作头像", "分享日常行踪"],
+            answer: 1,
+            explanation: "在网上应保护个人隐私，不轻易透露敏感信息。"
+        }
+    ]
+};
 
 // ===== 游戏状态 =====
-let gameState = {
-    playerName: '',
-    currentQuestion: 0,
-    score: 0,
-    correctCount: 0,
-    wrongCount: 0,
-    answers: [],
-    questions: [],
+let game = {
+    player: {
+        name: "",
+        hp: CONFIG.baseHP,
+        maxHp: CONFIG.baseHP,
+        energy: 0,
+        lives: CONFIG.maxLives,
+        coins: 0,
+        stars: {},
+        inventory: {
+            hint: 3,
+            shield: 2,
+            time: 2,
+            attack: 1
+        },
+        achievements: []
+    },
+    currentLevel: 0,
+    currentEnemy: null,
+    currentEnemyHp: 0,
+    currentEnemyMaxHp: 0,
+    round: 0,
+    correctInLevel: 0,
+    totalInLevel: 0,
+    isAnswered: false,
     timer: null,
-    timeLeft: 30,
-    isAnswered: false
+    timeLeft: CONFIG.timePerQuestion,
+    activeShield: false,
+    activeCrit: false,
+    battleLog: []
 };
 
-// ===== DOM Elements =====
+// ===== DOM引用 =====
 const screens = {
-    start: document.getElementById('start-screen'),
-    game: document.getElementById('game-screen'),
-    result: document.getElementById('result-screen'),
-    review: document.getElementById('review-screen')
+    start: document.getElementById('screen-start'),
+    levels: document.getElementById('screen-levels'),
+    battle: document.getElementById('screen-battle'),
+    result: document.getElementById('screen-level-result'),
+    gameover: document.getElementById('screen-gameover'),
+    victory: document.getElementById('screen-victory')
 };
 
-// ===== 粒子背景 =====
-function initParticles() {
-    const canvas = document.getElementById('particles');
+// ===== 背景动画 =====
+function initBackground() {
+    const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
+    let connections = [];
 
     function resize() {
         canvas.width = window.innerWidth;
@@ -284,9 +359,9 @@ function initParticles() {
         return {
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            size: Math.random() * 2 + 1,
-            speedX: (Math.random() - 0.5) * 0.5,
-            speedY: (Math.random() - 0.5) * 0.5,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+            size: Math.random() * 2 + 0.5,
             opacity: Math.random() * 0.5 + 0.1
         };
     }
@@ -294,7 +369,7 @@ function initParticles() {
     function init() {
         resize();
         particles = [];
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 60; i++) {
             particles.push(createParticle());
         }
     }
@@ -302,35 +377,35 @@ function initParticles() {
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        particles.forEach(function(p, index) {
-            p.x += p.speedX;
-            p.y += p.speedY;
+        particles.forEach(function(p) {
+            p.x += p.vx;
+            p.y += p.vy;
 
-            if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
-            if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
 
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
             ctx.fillStyle = 'rgba(0, 212, 255, ' + p.opacity + ')';
             ctx.fill();
-
-            particles.forEach(function(p2, index2) {
-                if (index !== index2) {
-                    var dx = p.x - p2.x;
-                    var dy = p.y - p2.y;
-                    var dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 150) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = 'rgba(0, 212, 255, ' + (0.1 * (1 - dist / 150)) + ')';
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
-                    }
-                }
-            });
         });
+
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 120) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = 'rgba(0, 212, 255, ' + (0.08 * (1 - dist / 120)) + ')';
+                    ctx.lineWidth = 0.5;
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
 
         requestAnimationFrame(animate);
     }
@@ -341,102 +416,286 @@ function initParticles() {
 }
 
 // ===== 屏幕切换 =====
-function showScreen(screenName) {
+function showScreen(name) {
     Object.keys(screens).forEach(function(key) {
         screens[key].classList.remove('active');
     });
-    screens[screenName].classList.add('active');
+    screens[name].classList.add('active');
 }
 
-// ===== 开始游戏 =====
-function startGame() {
+// ===== 开始新游戏 =====
+function startNewGame() {
     var nameInput = document.getElementById('player-name');
     var name = nameInput.value.trim();
 
     if (!name) {
         nameInput.style.borderColor = 'var(--accent)';
-        nameInput.placeholder = '请输入昵称后再开始';
+        nameInput.placeholder = '请输入代号！';
         setTimeout(function() {
-            nameInput.style.borderColor = 'var(--glass-border)';
-            nameInput.placeholder = '请输入您的昵称';
+            nameInput.style.borderColor = '';
+            nameInput.placeholder = '输入你的守护者代号';
         }, 2000);
         return;
     }
 
-    gameState.playerName = name;
-    document.getElementById('display-name').textContent = name;
+    game.player.name = name;
+    showLevelsScreen();
+}
 
-    gameState.questions = shuffleArray(questionBank.slice()).slice(0, 20);
-    gameState.currentQuestion = 0;
-    gameState.score = 0;
-    gameState.correctCount = 0;
-    gameState.wrongCount = 0;
-    gameState.answers = [];
+// ===== 关卡选择界面 =====
+function showLevelsScreen() {
+    document.getElementById('lives-display').textContent = game.player.lives;
+    document.getElementById('stars-display').textContent = getTotalStars();
+    document.getElementById('coins-display').textContent = game.player.coins;
 
-    showScreen('game');
-    loadQuestion();
+    var grid = document.getElementById('levels-grid');
+    grid.innerHTML = '';
+
+    CONFIG.levels.forEach(function(level, index) {
+        var card = document.createElement('div');
+        card.className = 'level-card';
+
+        var isLocked = index > 0 && !game.player.stars[index - 1];
+        if (isLocked) {
+            card.className += ' locked';
+        }
+
+        var stars = game.player.stars[index] || 0;
+        var starsHtml = '';
+        for (var i = 0; i < 3; i++) {
+            starsHtml += '<span class="' + (i < stars ? 'star' : 'star-empty') + '">⭐</span>';
+        }
+
+        var iconDiv = document.createElement('div');
+        iconDiv.className = 'level-icon';
+        iconDiv.textContent = level.icon;
+
+        var numDiv = document.createElement('div');
+        numDiv.className = 'level-num';
+        numDiv.textContent = '第' + level.id + '关';
+
+        var nameDiv = document.createElement('div');
+        nameDiv.className = 'level-name';
+        nameDiv.textContent = level.name;
+
+        var starsDiv = document.createElement('div');
+        starsDiv.className = 'level-stars';
+        starsDiv.innerHTML = starsHtml;
+
+        card.appendChild(iconDiv);
+        card.appendChild(numDiv);
+        card.appendChild(nameDiv);
+        card.appendChild(starsDiv);
+
+        if (!isLocked) {
+            card.onclick = function() { startLevel(index); };
+        }
+
+        grid.appendChild(card);
+    });
+
+    updateInventoryDisplay();
+    showScreen('levels');
+}
+
+function updateInventoryDisplay() {
+    var container = document.getElementById('inventory-items');
+    container.innerHTML = '';
+
+    var items = [
+        { key: 'hint', icon: '💡', name: '提示' },
+        { key: 'shield', icon: '🛡️', name: '护盾' },
+        { key: 'time', icon: '⏰', name: '延时' },
+        { key: 'attack', icon: '⚡', name: '暴击' }
+    ];
+
+    var hasItems = false;
+    items.forEach(function(item) {
+        if (game.player.inventory[item.key] > 0) {
+            hasItems = true;
+            var div = document.createElement('div');
+            div.className = 'inventory-item';
+            div.textContent = item.icon + ' ' + item.name + ' x' + game.player.inventory[item.key];
+            container.appendChild(div);
+        }
+    });
+
+    if (!hasItems) {
+        var emptyDiv = document.createElement('div');
+        emptyDiv.className = 'inventory-empty';
+        emptyDiv.textContent = '暂无道具';
+        container.appendChild(emptyDiv);
+    }
+}
+
+function getTotalStars() {
+    var total = 0;
+    Object.keys(game.player.stars).forEach(function(key) {
+        total += game.player.stars[key];
+    });
+    return total;
+}
+
+// ===== 开始关卡 =====
+function startLevel(levelIndex) {
+    game.currentLevel = levelIndex;
+    game.correctInLevel = 0;
+    game.totalInLevel = 0;
+    game.round = 0;
+    game.battleLog = [];
+    game.player.hp = game.player.maxHp;
+    game.player.energy = 0;
+
+    var level = CONFIG.levels[levelIndex];
+
+    // 设置第一个敌人
+    spawnNextEnemy();
+
+    // 更新UI
+    document.getElementById('battle-player-name').textContent = game.player.name;
+    document.getElementById('battle-level').textContent = '第' + (levelIndex + 1) + '关';
+
+    // 重置技能
+    document.getElementById('skill-hint-count').textContent = game.player.inventory.hint;
+    document.getElementById('skill-shield-count').textContent = game.player.inventory.shield;
+    document.getElementById('skill-time-count').textContent = game.player.inventory.time;
+    document.getElementById('skill-attack-count').textContent = game.player.inventory.attack;
+
+    updateBattleUI();
+    showScreen('battle');
+
+    addBattleLog('⚔️ 进入第' + (levelIndex + 1) + '关: ' + level.name);
+    addBattleLog(level.description);
+
+    setTimeout(function() {
+        loadQuestion();
+    }, 1000);
+}
+
+function spawnNextEnemy() {
+    var level = CONFIG.levels[game.currentLevel];
+    var enemies = level.enemies;
+
+    if (game.round < enemies.length) {
+        game.currentEnemy = enemies[game.round];
+    } else {
+        game.currentEnemy = level.boss;
+    }
+
+    game.currentEnemyHp = game.currentEnemy.hp;
+    game.currentEnemyMaxHp = game.currentEnemy.hp;
+
+    document.getElementById('enemy-name').textContent = game.currentEnemy.name;
+    document.getElementById('enemy-avatar').querySelector('span').textContent = game.currentEnemy.icon;
+}
+
+// ===== 战斗UI更新 =====
+function updateBattleUI() {
+    // 玩家HP
+    var playerHpPercent = (game.player.hp / game.player.maxHp) * 100;
+    var playerHpBar = document.getElementById('player-hp-bar');
+    playerHpBar.style.width = playerHpPercent + '%';
+    playerHpBar.className = 'hp-fill player-hp';
+    if (playerHpPercent <= 30) playerHpBar.classList.add('low');
+    else if (playerHpPercent <= 60) playerHpBar.classList.add('medium');
+    document.getElementById('player-hp-text').textContent = game.player.hp + '/' + game.player.maxHp;
+
+    // 能量
+    var energyPercent = (game.player.energy / 100) * 100;
+    document.getElementById('player-energy-bar').style.width = energyPercent + '%';
+    document.getElementById('player-energy').textContent = game.player.energy;
+
+    // 敌人HP
+    var enemyHpPercent = (game.currentEnemyHp / game.currentEnemyMaxHp) * 100;
+    var enemyHpBar = document.getElementById('enemy-hp-bar');
+    enemyHpBar.style.width = enemyHpPercent + '%';
+    document.getElementById('enemy-hp-text').textContent = game.currentEnemyHp + '/' + game.currentEnemyMaxHp;
+
+    // 回合
+    document.getElementById('round-num').textContent = game.round + 1;
+
+    // 技能按钮
+    document.getElementById('skill-hint').disabled = game.player.inventory.hint <= 0;
+    document.getElementById('skill-shield').disabled = game.player.inventory.shield <= 0;
+    document.getElementById('skill-time').disabled = game.player.inventory.time <= 0;
+    document.getElementById('skill-attack').disabled = game.player.inventory.attack <= 0;
+}
+
+// ===== 战斗日志 =====
+function addBattleLog(text, type) {
+    var log = document.getElementById('battle-log');
+    var p = document.createElement('p');
+    p.textContent = text;
+    if (type) p.className = type;
+    log.appendChild(p);
+    log.scrollTop = log.scrollHeight;
 }
 
 // ===== 加载题目 =====
 function loadQuestion() {
-    var question = gameState.questions[gameState.currentQuestion];
-    gameState.isAnswered = false;
-    gameState.timeLeft = 30;
+    game.isAnswered = false;
+    game.timeLeft = CONFIG.timePerQuestion;
+    game.activeShield = false;
+    game.activeCrit = false;
 
-    document.getElementById('current-q').textContent = gameState.currentQuestion + 1;
-    document.getElementById('score').textContent = gameState.score;
-    document.getElementById('progress').style.width = ((gameState.currentQuestion) / 20 * 100) + '%';
+    // 随机选择分类和题目
+    var categories = Object.keys(QUESTIONS);
+    var category = categories[Math.floor(Math.random() * categories.length)];
+    var questions = QUESTIONS[category];
+    var question = questions[Math.floor(Math.random() * questions.length)];
 
-    document.getElementById('category').textContent = question.category;
-    document.getElementById('question-text').textContent = question.question;
+    // 显示题目
+    document.getElementById('q-category').textContent = category;
+    document.getElementById('q-content').textContent = question.question;
+    document.getElementById('q-timer').textContent = '⏱️ ' + game.timeLeft;
+    document.getElementById('q-timer').className = 'question-timer';
 
-    var optionsArea = document.getElementById('options-area');
+    // 生成选项
+    var optionsGrid = document.getElementById('options-grid');
+    optionsGrid.innerHTML = '';
     var letters = ['A', 'B', 'C', 'D'];
-    optionsArea.innerHTML = '';
 
     question.options.forEach(function(option, index) {
         var btn = document.createElement('button');
         btn.className = 'option-btn';
-        btn.id = 'option-' + index;
-        btn.onclick = function() { selectAnswer(index); };
+        btn.id = 'opt-' + index;
 
         var letterSpan = document.createElement('span');
         letterSpan.className = 'option-letter';
         letterSpan.textContent = letters[index];
 
         var textSpan = document.createElement('span');
-        textSpan.className = 'option-text';
         textSpan.textContent = option;
 
         btn.appendChild(letterSpan);
         btn.appendChild(textSpan);
-        optionsArea.appendChild(btn);
+
+        btn.onclick = function() { selectAnswer(index, question); };
+        optionsGrid.appendChild(btn);
     });
 
-    var feedback = document.getElementById('feedback');
-    feedback.className = 'feedback';
-    document.getElementById('btn-next').style.display = 'none';
+    // 存储当前题目
+    game.currentQuestion = question;
 
-    startTimer();
+    // 启动计时器
+    startQuestionTimer();
 }
 
 // ===== 计时器 =====
-function startTimer() {
-    clearInterval(gameState.timer);
-    var timerElement = document.getElementById('timer');
+function startQuestionTimer() {
+    clearInterval(game.timer);
+    var timerEl = document.getElementById('q-timer');
 
-    gameState.timer = setInterval(function() {
-        gameState.timeLeft--;
-        timerElement.textContent = '⏱️ ' + gameState.timeLeft;
+    game.timer = setInterval(function() {
+        game.timeLeft--;
+        timerEl.textContent = '⏱️ ' + game.timeLeft;
 
-        if (gameState.timeLeft <= 10) {
-            timerElement.classList.add('warning');
-        } else {
-            timerElement.classList.remove('warning');
+        if (game.timeLeft <= 10) {
+            timerEl.className = 'question-timer warning';
         }
 
-        if (gameState.timeLeft <= 0) {
-            clearInterval(gameState.timer);
+        if (game.timeLeft <= 0) {
+            clearInterval(game.timer);
             handleTimeout();
         }
     }, 1000);
@@ -444,287 +703,393 @@ function startTimer() {
 
 // ===== 超时处理 =====
 function handleTimeout() {
-    gameState.isAnswered = true;
-    var question = gameState.questions[gameState.currentQuestion];
+    game.isAnswered = true;
+    game.totalInLevel++;
 
+    // 禁用选项
     var buttons = document.querySelectorAll('.option-btn');
     for (var i = 0; i < buttons.length; i++) {
         buttons[i].disabled = true;
     }
 
-    document.getElementById('option-' + question.answer).classList.add('show-correct');
+    // 显示正确答案
+    document.getElementById('opt-' + game.currentQuestion.answer).classList.add('show-correct');
 
-    var feedback = document.getElementById('feedback');
-    feedback.className = 'feedback show timeout';
-    feedback.querySelector('.feedback-icon').textContent = '⏰';
-    feedback.querySelector('.feedback-text').textContent = '时间到！正确答案是：' + question.options[question.answer];
-
-    gameState.answers.push({
-        question: question,
-        userAnswer: -1,
-        isCorrect: false,
-        isTimeout: true
-    });
-
-    gameState.wrongCount++;
-
-    document.getElementById('btn-next').style.display = 'block';
-
-    if (gameState.currentQuestion >= 19) {
-        document.getElementById('btn-next').textContent = '查看结果 →';
-    }
-}
-
-// ===== 选择答案 =====
-function selectAnswer(index) {
-    if (gameState.isAnswered) return;
-
-    gameState.isAnswered = true;
-    clearInterval(gameState.timer);
-
-    var question = gameState.questions[gameState.currentQuestion];
-    var isCorrect = index === question.answer;
-
-    var buttons = document.querySelectorAll('.option-btn');
-    for (var i = 0; i < buttons.length; i++) {
-        buttons[i].disabled = true;
-    }
-
-    document.getElementById('option-' + index).classList.add(isCorrect ? 'correct' : 'wrong');
-    if (!isCorrect) {
-        document.getElementById('option-' + question.answer).classList.add('show-correct');
-    }
-
-    if (isCorrect) {
-        gameState.score += 5;
-        gameState.correctCount++;
+    // 敌人攻击
+    var damage = game.currentEnemy.attack;
+    if (!game.activeShield) {
+        game.player.hp = Math.max(0, game.player.hp - damage);
+        showDamageEffect('player', damage, 'damage');
+        addBattleLog('⏰ 时间到！' + game.currentEnemy.name + '对你造成 ' + damage + ' 点伤害！', 'damage');
     } else {
-        gameState.wrongCount++;
+        addBattleLog('🛡️ 护盾抵消了攻击！');
     }
 
-    var feedback = document.getElementById('feedback');
-    feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong');
-    feedback.querySelector('.feedback-icon').textContent = isCorrect ? '✅' : '❌';
-    feedback.querySelector('.feedback-text').textContent = isCorrect
-        ? '回答正确！+5分'
-        : '回答错误！正确答案是：' + question.options[question.answer];
+    updateBattleUI();
 
-    gameState.answers.push({
-        question: question,
-        userAnswer: index,
-        isCorrect: isCorrect,
-        isTimeout: false
-    });
-
-    document.getElementById('score').textContent = gameState.score;
-
-    document.getElementById('btn-next').style.display = 'block';
-
-    if (gameState.currentQuestion >= 19) {
-        document.getElementById('btn-next').textContent = '查看结果 →';
-    }
-}
-
-// ===== 下一题 =====
-function nextQuestion() {
-    gameState.currentQuestion++;
-
-    if (gameState.currentQuestion >= 20) {
-        showResult();
+    // 检查玩家是否死亡
+    if (game.player.hp <= 0) {
+        setTimeout(function() {
+            gameOver();
+        }, 1500);
         return;
     }
 
-    loadQuestion();
-}
-
-// ===== 显示结果 =====
-function showResult() {
-    clearInterval(gameState.timer);
-
-    var totalScore = gameState.score;
-    var accuracy = Math.round((gameState.correctCount / 20) * 100);
-
-    document.getElementById('final-score').textContent = totalScore;
-    document.getElementById('correct-count').textContent = gameState.correctCount;
-    document.getElementById('wrong-count').textContent = gameState.wrongCount;
-    document.getElementById('accuracy').textContent = accuracy + '%';
-
-    var circle = document.getElementById('score-circle');
-    var circumference = 2 * Math.PI * 85;
-    var offset = circumference - (totalScore / 100) * circumference;
+    // 等待后加载下一题
     setTimeout(function() {
-        circle.style.strokeDashoffset = offset;
-    }, 300);
+        loadQuestion();
+    }, 2000);
+}
 
-    var rankElement = document.getElementById('result-rank');
-    var resultIcon = document.getElementById('result-icon');
-    var resultTitle = document.getElementById('result-title');
-    var resultMessage = document.getElementById('result-message');
+// ===== 选择答案 =====
+function selectAnswer(index, question) {
+    if (game.isAnswered) return;
 
-    var rank, rankClass, message;
+    game.isAnswered = true;
+    clearInterval(game.timer);
+    game.totalInLevel++;
 
-    if (totalScore >= 90) {
-        rank = '🏆 网络安全大师';
-        rankClass = 'gold';
-        resultIcon.textContent = '🏆';
-        resultTitle.textContent = '太棒了！';
-        message = '您对网络安全知识掌握得非常全面！您具备很强的网络安全意识，是网络安全的守护者。继续保持，传播网络安全知识，让更多人受益！';
-    } else if (totalScore >= 70) {
-        rank = '🥈 网络安全达人';
-        rankClass = 'silver';
-        resultIcon.textContent = '🥈';
-        resultTitle.textContent = '很不错！';
-        message = '您对网络安全有较好的了解！建议继续深入学习个人信息保护和防范网络诈骗的知识，提升自己的安全防护能力。';
-    } else if (totalScore >= 50) {
-        rank = '🥉 网络安全学徒';
-        rankClass = 'bronze';
-        resultIcon.textContent = '🥉';
-        resultTitle.textContent = '继续加油！';
-        message = '您对网络安全有基本了解，但还需要加强学习。建议多关注网络安全法、个人信息保护法等法律法规，提高安全意识。';
+    var isCorrect = index === question.answer;
+
+    // 禁用选项
+    var buttons = document.querySelectorAll('.option-btn');
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = true;
+    }
+
+    // 标记答案
+    document.getElementById('opt-' + index).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) {
+        document.getElementById('opt-' + question.answer).classList.add('show-correct');
+    }
+
+    if (isCorrect) {
+        // 答对 - 攻击敌人
+        game.correctInLevel++;
+        game.player.energy = Math.min(100, game.player.energy + 20);
+
+        var baseDamage = 20 + Math.floor(game.player.energy / 10);
+        var damage = game.activeCrit ? baseDamage * 2 : baseDamage;
+        var logType = game.activeCrit ? 'critical' : '';
+
+        game.currentEnemyHp = Math.max(0, game.currentEnemyHp - damage);
+        showDamageEffect('enemy', damage, game.activeCrit ? 'critical' : 'damage');
+
+        if (game.activeCrit) {
+            addBattleLog('⚡ 暴击！对 ' + game.currentEnemy.name + ' 造成 ' + damage + ' 点伤害！', 'critical');
+        } else {
+            addBattleLog('✅ 回答正确！对 ' + game.currentEnemy.name + ' 造成 ' + damage + ' 点伤害！', 'heal');
+        }
+
+        // 检查敌人是否死亡
+        if (game.currentEnemyHp <= 0) {
+            setTimeout(function() {
+                enemyDefeated();
+            }, 1500);
+            updateBattleUI();
+            return;
+        }
     } else {
-        rank = '📚 网络安全新手';
-        rankClass = 'normal';
-        resultIcon.textContent = '📚';
-        resultTitle.textContent = '还需努力！';
-        message = '网络安全知识还需要加强哦！建议认真学习《网络安全法》《个人信息保护法》等法律法规，提高网络安全意识，保护好自己的信息安全。';
+        // 答错 - 敌人攻击
+        var damage = game.currentEnemy.attack;
+
+        if (!game.activeShield) {
+            game.player.hp = Math.max(0, game.player.hp - damage);
+            showDamageEffect('player', damage, 'damage');
+            addBattleLog('❌ 回答错误！' + game.currentEnemy.name + '对你造成 ' + damage + ' 点伤害！', 'damage');
+        } else {
+            addBattleLog('🛡️ 护盾抵消了攻击！正确答案是：' + question.options[question.answer]);
+        }
+
+        // 检查玩家是否死亡
+        if (game.player.hp <= 0) {
+            setTimeout(function() {
+                gameOver();
+            }, 1500);
+            updateBattleUI();
+            return;
+        }
     }
 
-    var rankBadge = document.createElement('span');
-    rankBadge.className = 'rank-badge ' + rankClass;
-    rankBadge.textContent = rank;
-    rankElement.innerHTML = '';
-    rankElement.appendChild(rankBadge);
+    updateBattleUI();
 
-    var messageP = document.createElement('p');
-    messageP.textContent = message;
-    resultMessage.innerHTML = '';
-    resultMessage.appendChild(messageP);
+    // 等待后加载下一题
+    setTimeout(function() {
+        loadQuestion();
+    }, 2000);
+}
 
-    var svgNS = "http://www.w3.org/2000/svg";
-    var defs = document.createElementNS(svgNS, "defs");
-    var gradient = document.createElementNS(svgNS, "linearGradient");
-    gradient.setAttribute("id", "scoreGradient");
-    gradient.setAttribute("x1", "0%");
-    gradient.setAttribute("y1", "0%");
-    gradient.setAttribute("x2", "100%");
-    gradient.setAttribute("y2", "0%");
+// ===== 敌人被击败 =====
+function enemyDefeated() {
+    addBattleLog('🎉 ' + game.currentEnemy.name + ' 被击败！');
 
-    var stop1 = document.createElementNS(svgNS, "stop");
-    stop1.setAttribute("offset", "0%");
-    stop1.setAttribute("style", "stop-color:#00d4ff");
+    game.round++;
 
-    var stop2 = document.createElementNS(svgNS, "stop");
-    stop2.setAttribute("offset", "100%");
-    stop2.setAttribute("style", "stop-color:#7b2ff7");
+    var level = CONFIG.levels[game.currentLevel];
 
-    gradient.appendChild(stop1);
-    gradient.appendChild(stop2);
-    defs.appendChild(gradient);
-
-    var svg = document.querySelector('.score-circle svg');
-    var existingDefs = svg.querySelector('defs');
-    if (existingDefs) {
-        svg.removeChild(existingDefs);
+    // 检查是否击败Boss
+    if (game.round > level.enemies.length) {
+        // Boss被击败 - 关卡通过
+        setTimeout(function() {
+            levelComplete();
+        }, 1000);
+        return;
     }
-    svg.insertBefore(defs, svg.firstChild);
 
-    showScreen('result');
+    // 生成下一个敌人
+    spawnNextEnemy();
+    addBattleLog('⚔️ ' + game.currentEnemy.name + ' 出现了！');
+
+    updateBattleUI();
+
+    setTimeout(function() {
+        loadQuestion();
+    }, 1500);
 }
 
-// ===== 重新开始 =====
-function restartGame() {
-    gameState = {
-        playerName: '',
-        currentQuestion: 0,
-        score: 0,
-        correctCount: 0,
-        wrongCount: 0,
-        answers: [],
-        questions: [],
-        timer: null,
-        timeLeft: 30,
-        isAnswered: false
-    };
+// ===== 关卡完成 =====
+function levelComplete() {
+    var level = CONFIG.levels[game.currentLevel];
+    var accuracy = game.totalInLevel > 0 ? (game.correctInLevel / game.totalInLevel) : 0;
 
-    document.getElementById('player-name').value = '';
-    showScreen('start');
-}
+    // 计算星星
+    var stars = 0;
+    if (accuracy >= 0.5) stars = 1;
+    if (accuracy >= 0.7) stars = 2;
+    if (accuracy >= 0.9) stars = 3;
 
-// ===== 查看解析 =====
-function reviewAnswers() {
-    var reviewList = document.getElementById('review-list');
-    var letters = ['A', 'B', 'C', 'D'];
-    reviewList.innerHTML = '';
+    // 更新最高星星
+    if (!game.player.stars[game.currentLevel] || game.player.stars[game.currentLevel] < stars) {
+        game.player.stars[game.currentLevel] = stars;
+    }
 
-    gameState.answers.forEach(function(answer, index) {
-        var statusClass = answer.isTimeout ? 'timeout' : (answer.isCorrect ? 'correct' : 'wrong');
-        var statusText = answer.isTimeout ? '⏰ 超时' : (answer.isCorrect ? '✅ 正确' : '❌ 错误');
+    // 奖励
+    game.player.coins += level.reward.coins;
 
-        var item = document.createElement('div');
-        item.className = 'review-item ' + statusClass;
-
-        var questionDiv = document.createElement('div');
-        questionDiv.className = 'review-question';
-        questionDiv.textContent = (index + 1) + '. ' + answer.question.question;
-
-        var statusSpan = document.createElement('span');
-        statusSpan.style.float = 'right';
-        statusSpan.style.fontSize = '14px';
-        statusSpan.textContent = statusText;
-        questionDiv.appendChild(statusSpan);
-
-        var answerDiv = document.createElement('div');
-        answerDiv.className = 'review-answer';
-
-        answer.question.options.forEach(function(opt, i) {
-            var optDiv = document.createElement('div');
-            optDiv.className = 'review-answer-item';
-            if (i === answer.userAnswer) optDiv.className += ' user-answer';
-            if (i === answer.question.answer) optDiv.className += ' correct-answer';
-            optDiv.textContent = letters[i] + '. ' + opt;
-            answerDiv.appendChild(optDiv);
-        });
-
-        var explanationDiv = document.createElement('div');
-        explanationDiv.className = 'review-explanation';
-
-        var strongEl = document.createElement('strong');
-        strongEl.textContent = '解析：';
-        explanationDiv.appendChild(strongEl);
-        explanationDiv.appendChild(document.createTextNode(answer.question.explanation));
-
-        item.appendChild(questionDiv);
-        item.appendChild(answerDiv);
-        item.appendChild(explanationDiv);
-        reviewList.appendChild(item);
+    // 奖励道具
+    level.reward.items.forEach(function(item) {
+        game.player.inventory[item] = (game.player.inventory[item] || 0) + 1;
     });
 
-    showScreen('review');
-}
+    // 检查成就
+    checkAchievements(stars);
 
-// ===== 返回结果 =====
-function goToResult() {
+    // 显示结算界面
+    document.getElementById('stat-correct').textContent = game.correctInLevel + '/' + game.totalInLevel;
+    document.getElementById('stat-exp').textContent = '+' + level.reward.exp;
+    document.getElementById('stat-coins').textContent = '+' + level.reward.coins;
+
+    // 显示星星
+    var starsDisplay = document.getElementById('stars-result');
+    var starElements = starsDisplay.querySelectorAll('.star');
+    starElements.forEach(function(el, i) {
+        el.className = i < stars ? 'star earned' : 'star';
+        el.style.animationDelay = (i * 0.3) + 's';
+    });
+
+    // 显示奖励道具
+    var rewardsContainer = document.getElementById('reward-items');
+    rewardsContainer.innerHTML = '';
+
+    var itemNames = {
+        hint: '💡 提示',
+        shield: '🛡️ 护盾',
+        time: '⏰ 延时',
+        attack: '⚡ 暴击'
+    };
+
+    level.reward.items.forEach(function(item) {
+        var div = document.createElement('div');
+        div.className = 'reward-item';
+        div.textContent = itemNames[item] || item;
+        rewardsContainer.appendChild(div);
+    });
+
+    // 下一关按钮
+    var nextBtn = document.getElementById('btn-next-level');
+    if (game.currentLevel < CONFIG.levels.length - 1) {
+        nextBtn.style.display = '';
+        nextBtn.textContent = '下一关';
+    } else {
+        nextBtn.style.display = '';
+        nextBtn.textContent = '查看结局';
+    }
+
     showScreen('result');
 }
 
-// ===== 工具函数 =====
-function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+// ===== 下一关 =====
+function nextLevel() {
+    if (game.currentLevel < CONFIG.levels.length - 1) {
+        startLevel(game.currentLevel + 1);
+    } else {
+        showVictory();
     }
-    return array;
+}
+
+// ===== 游戏结束 =====
+function gameOver() {
+    game.player.lives--;
+
+    if (game.player.lives <= 0) {
+        // 真正的Game Over
+        showScreen('gameover');
+    } else {
+        // 还有生命
+        showScreen('gameover');
+    }
+}
+
+// ===== 重试关卡 =====
+function retryLevel() {
+    if (game.player.lives > 0) {
+        startLevel(game.currentLevel);
+    } else {
+        game.player.lives = CONFIG.maxLives;
+        showLevelsScreen();
+    }
+}
+
+// ===== 返回关卡选择 =====
+function goToLevels() {
+    showLevelsScreen();
+}
+
+// ===== 最终胜利 =====
+function showVictory() {
+    document.getElementById('final-stars').textContent = getTotalStars();
+    document.getElementById('final-coins').textContent = game.player.coins;
+
+    var achievementsContainer = document.getElementById('achievements');
+    achievementsContainer.innerHTML = '';
+
+    game.player.achievements.forEach(function(achievement) {
+        var div = document.createElement('div');
+        div.className = 'achievement';
+        div.textContent = achievement;
+        achievementsContainer.appendChild(div);
+    });
+
+    showScreen('victory');
+}
+
+// ===== 技能系统 =====
+function useSkill(type) {
+    if (game.isAnswered) return;
+
+    if (type === 'hint' && game.player.inventory.hint > 0) {
+        // 提示：排除一个错误答案
+        game.player.inventory.hint--;
+        document.getElementById('skill-hint-count').textContent = game.player.inventory.hint;
+
+        var wrongOptions = [];
+        for (var i = 0; i < 4; i++) {
+            if (i !== game.currentQuestion.answer) {
+                wrongOptions.push(i);
+            }
+        }
+
+        var toEliminate = wrongOptions[Math.floor(Math.random() * wrongOptions.length)];
+        document.getElementById('opt-' + toEliminate).classList.add('eliminated');
+
+        addBattleLog('💡 使用提示，排除了一个错误答案');
+
+    } else if (type === 'shield' && game.player.inventory.shield > 0) {
+        // 护盾：答错不扣血
+        game.player.inventory.shield--;
+        document.getElementById('skill-shield-count').textContent = game.player.inventory.shield;
+        game.activeShield = true;
+
+        addBattleLog('🛡️ 激活护盾，答错不扣血');
+
+    } else if (type === 'time' && game.player.inventory.time > 0) {
+        // 延时：增加15秒
+        game.player.inventory.time--;
+        document.getElementById('skill-time-count').textContent = game.player.inventory.time;
+        game.timeLeft += 15;
+
+        addBattleLog('⏰ 使用延时，增加15秒');
+
+    } else if (type === 'attack' && game.player.inventory.attack > 0) {
+        // 暴击：造成双倍伤害
+        game.player.inventory.attack--;
+        document.getElementById('skill-attack-count').textContent = game.player.inventory.attack;
+        game.activeCrit = true;
+
+        addBattleLog('⚡ 激活暴击，下次答对造成双倍伤害');
+    }
+
+    document.getElementById('skill-' + type).disabled = game.player.inventory[type] <= 0;
+}
+
+// ===== 伤害效果 =====
+function showDamageEffect(target, damage, type) {
+    var container = document.getElementById('battle-effects');
+    var effect = document.createElement('div');
+    effect.className = 'damage-effect ' + type;
+    effect.textContent = '-' + damage;
+
+    if (target === 'player') {
+        effect.style.left = '10%';
+        effect.style.top = '30%';
+    } else {
+        effect.style.right = '10%';
+        effect.style.top = '30%';
+    }
+
+    container.appendChild(effect);
+
+    // 屏幕震动
+    if (type === 'damage') {
+        document.querySelector('.container').classList.add('screen-shake');
+        setTimeout(function() {
+            document.querySelector('.container').classList.remove('screen-shake');
+        }, 300);
+    }
+
+    setTimeout(function() {
+        container.removeChild(effect);
+    }, 1000);
+}
+
+// ===== 成就检查 =====
+function checkAchievements(stars) {
+    var achievements = [];
+
+    if (stars === 3) {
+        achievements.push('🏆 完美通关');
+    }
+
+    if (game.correctInLevel === game.totalInLevel) {
+        achievements.push('💯 全部正确');
+    }
+
+    if (game.player.hp >= 80) {
+        achievements.push('❤️ 高血量通关');
+    }
+
+    achievements.forEach(function(a) {
+        if (game.player.achievements.indexOf(a) === -1) {
+            game.player.achievements.push(a);
+        }
+    });
+}
+
+// ===== 音效控制 =====
+let soundEnabled = true;
+
+function toggleSound() {
+    soundEnabled = !soundEnabled;
+    document.getElementById('sound-toggle').textContent = soundEnabled ? '🔊' : '🔇';
 }
 
 // ===== 初始化 =====
 document.addEventListener('DOMContentLoaded', function() {
-    initParticles();
+    initBackground();
 
     document.getElementById('player-name').addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
-            startGame();
+            startNewGame();
         }
     });
 });

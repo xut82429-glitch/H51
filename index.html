@@ -3,183 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>e起护网 青春护航 - 网络安全知识挑战赛</title>
+    <title>网络安全守护者 - 闯关大作战</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- 粒子背景 -->
-    <canvas id="particles"></canvas>
+    <!-- 背景Canvas -->
+    <canvas id="bg-canvas"></canvas>
 
-    <!-- 开始界面 -->
-    <div id="start-screen" class="screen active">
+    <!-- 音效控制 -->
+    <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()">🔊</button>
+
+    <!-- ===== 开始界面 ===== -->
+    <div id="screen-start" class="screen active">
         <div class="container">
-            <div class="logo-wrapper">
-                <div class="shield-icon">
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <div class="game-logo">
+                <div class="shield-anim">
+                    <div class="shield-ring"></div>
+                    <div class="shield-ring"></div>
+                    <div class="shield-ring"></div>
+                    <svg class="shield-svg" viewBox="0 0 120 140">
                         <defs>
-                            <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#00d4ff"/>
-                                <stop offset="100%" style="stop-color:#7b2ff7"/>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#7b2ff7;stop-opacity:1" />
                             </linearGradient>
                         </defs>
-                        <path d="M50 5 L90 25 L90 55 C90 75 70 90 50 95 C30 90 10 75 10 55 L10 25 Z"
-                              fill="url(#shieldGrad)" opacity="0.9"/>
-                        <path d="M50 15 L80 30 L80 55 C80 70 65 82 50 87 C35 82 20 70 20 55 L20 30 Z"
-                              fill="none" stroke="white" stroke-width="2"/>
-                        <text x="50" y="60" text-anchor="middle" fill="white" font-size="30" font-weight="bold">盾</text>
+                        <path d="M60 10 L110 35 L110 75 C110 105 85 130 60 135 C35 130 10 105 10 75 L10 35 Z" fill="url(#grad1)"/>
+                        <path d="M60 25 L95 42 L95 72 C95 95 78 115 60 120 C42 115 25 95 25 72 L25 42 Z" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+                        <text x="60" y="75" text-anchor="middle" fill="white" font-size="40" font-weight="bold">盾</text>
                     </svg>
                 </div>
-                <h1 class="title">
-                    <span class="title-main">e起护网</span>
-                    <span class="title-sub">青春护航</span>
+                <h1 class="game-title">
+                    <span class="title-line1">网络安全守护者</span>
+                    <span class="title-line2">闯关大作战</span>
                 </h1>
-                <p class="subtitle">网络安全知识挑战赛</p>
             </div>
 
-            <div class="start-info">
-                <div class="info-card">
-                    <div class="info-icon">📋</div>
-                    <div class="info-text">
-                        <strong>比赛规则</strong>
-                        <p>共20道题目，每题5分，满分100分</p>
-                    </div>
-                </div>
-                <div class="info-card">
-                    <div class="info-icon">⏱️</div>
-                    <div class="info-text">
-                        <strong>答题时间</strong>
-                        <p>每题限时30秒</p>
-                    </div>
-                </div>
-                <div class="info-card">
-                    <div class="info-icon">🛡️</div>
-                    <div class="info-text">
-                        <strong>知识范围</strong>
-                        <p>网络安全法、个人信息保护、防范诈骗等</p>
-                    </div>
-                </div>
+            <div class="story-intro">
+                <p>网络世界危机四伏，邪恶的黑客军团正在入侵！</p>
+                <p>作为网络安全守护者，你需要运用知识，击败敌人，守护网络世界！</p>
             </div>
 
-            <div class="player-input">
-                <input type="text" id="player-name" placeholder="请输入您的昵称" maxlength="10">
+            <div class="start-form">
+                <input type="text" id="player-name" placeholder="输入你的守护者代号" maxlength="8">
+                <button class="btn-primary btn-start" onclick="startNewGame()">
+                    <span class="btn-icon">⚔️</span>
+                    <span class="btn-text">开始冒险</span>
+                </button>
             </div>
 
-            <button class="btn-start" onclick="startGame()">
-                <span>开始挑战</span>
-                <div class="btn-particles"></div>
-            </button>
+            <div class="start-features">
+                <div class="feature">
+                    <span class="feature-icon">🏰</span>
+                    <span class="feature-text">5大关卡</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">👾</span>
+                    <span class="feature-text">击败Boss</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">💎</span>
+                    <span class="feature-text">收集道具</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🏆</span>
+                    <span class="feature-text">成就系统</span>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- 游戏界面 -->
-    <div id="game-screen" class="screen">
+    <!-- ===== 关卡选择界面 ===== -->
+    <div id="screen-levels" class="screen">
         <div class="container">
-            <!-- 顶部状态栏 -->
-            <div class="status-bar">
-                <div class="status-left">
-                    <span class="player-display">👤 <span id="display-name"></span></span>
-                    <span class="score-display">🏆 得分: <span id="score">0</span></span>
-                </div>
-                <div class="status-right">
-                    <span class="question-count">📝 <span id="current-q">1</span>/20</span>
-                    <span class="timer" id="timer">⏱️ 30</span>
+            <div class="levels-header">
+                <h2>选择关卡</h2>
+                <div class="player-stats-bar">
+                    <span class="stat-item">❤️ <span id="lives-display">5</span></span>
+                    <span class="stat-item">⭐ <span id="stars-display">0</span></span>
+                    <span class="stat-item">💰 <span id="coins-display">0</span></span>
                 </div>
             </div>
 
-            <!-- 进度条 -->
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress"></div>
+            <div class="levels-grid" id="levels-grid">
+                <!-- 关卡通过JS动态生成 -->
+            </div>
+
+            <div class="inventory-bar">
+                <h3>道具栏</h3>
+                <div class="inventory-items" id="inventory-items">
+                    <div class="inventory-empty">暂无道具</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 战斗界面 ===== -->
+    <div id="screen-battle" class="screen">
+        <div class="container">
+            <!-- 战斗状态栏 -->
+            <div class="battle-status">
+                <div class="player-status">
+                    <div class="avatar player-avatar">
+                        <span>🛡️</span>
+                    </div>
+                    <div class="status-info">
+                        <div class="status-name" id="battle-player-name">守护者</div>
+                        <div class="hp-bar">
+                            <div class="hp-fill player-hp" id="player-hp-bar"></div>
+                            <span class="hp-text" id="player-hp-text">100/100</span>
+                        </div>
+                        <div class="energy-bar">
+                            <div class="energy-fill" id="player-energy-bar"></div>
+                            <span class="energy-text">能量: <span id="player-energy">0</span>/100</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="battle-info">
+                    <div class="level-badge" id="battle-level">第1关</div>
+                    <div class="round-display">回合 <span id="round-num">1</span></div>
+                </div>
+
+                <div class="enemy-status">
+                    <div class="status-info right">
+                        <div class="status-name" id="enemy-name">病毒小兵</div>
+                        <div class="hp-bar">
+                            <div class="hp-fill enemy-hp" id="enemy-hp-bar"></div>
+                            <span class="hp-text" id="enemy-hp-text">50/50</span>
+                        </div>
+                    </div>
+                    <div class="avatar enemy-avatar" id="enemy-avatar">
+                        <span>👾</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 战斗场景 -->
+            <div class="battle-scene">
+                <div class="battle-effects" id="battle-effects"></div>
+                <div class="battle-log" id="battle-log">
+                    <p>战斗开始！</p>
+                </div>
             </div>
 
             <!-- 题目区域 -->
-            <div class="question-area">
-                <div class="question-category" id="category">网络安全法</div>
-                <h2 class="question-text" id="question-text"></h2>
+            <div class="question-panel" id="question-panel">
+                <div class="question-header">
+                    <span class="question-category" id="q-category">网络安全</span>
+                    <span class="question-timer" id="q-timer">⏱️ 20</span>
+                </div>
+                <div class="question-content" id="q-content">
+                    <!-- 题目内容 -->
+                </div>
+                <div class="options-grid" id="options-grid">
+                    <!-- 选项通过JS生成 -->
+                </div>
             </div>
 
-            <!-- 选项区域 -->
-            <div class="options-area" id="options-area">
-                <!-- 选项将通过JS动态生成 -->
+            <!-- 技能栏 -->
+            <div class="skills-bar" id="skills-bar">
+                <button class="skill-btn" id="skill-hint" onclick="useSkill('hint')" title="提示：排除一个错误答案">
+                    <span class="skill-icon">💡</span>
+                    <span class="skill-name">提示</span>
+                    <span class="skill-count" id="skill-hint-count">3</span>
+                </button>
+                <button class="skill-btn" id="skill-shield" onclick="useSkill('shield')" title="护盾：答错不扣血">
+                    <span class="skill-icon">🛡️</span>
+                    <span class="skill-name">护盾</span>
+                    <span class="skill-count" id="skill-shield-count">2</span>
+                </button>
+                <button class="skill-btn" id="skill-time" onclick="useSkill('time')" title="延时：增加15秒">
+                    <span class="skill-icon">⏰</span>
+                    <span class="skill-name">延时</span>
+                    <span class="skill-count" id="skill-time-count">2</span>
+                </button>
+                <button class="skill-btn" id="skill-attack" onclick="useSkill('attack')" title="暴击：造成双倍伤害">
+                    <span class="skill-icon">⚡</span>
+                    <span class="skill-name">暴击</span>
+                    <span class="skill-count" id="skill-attack-count">1</span>
+                </button>
             </div>
-
-            <!-- 反馈提示 -->
-            <div class="feedback" id="feedback">
-                <div class="feedback-icon"></div>
-                <div class="feedback-text"></div>
-            </div>
-
-            <!-- 下一题按钮 -->
-            <button class="btn-next" id="btn-next" onclick="nextQuestion()" style="display:none">
-                下一题 →
-            </button>
         </div>
     </div>
 
-    <!-- 结果界面 -->
-    <div id="result-screen" class="screen">
+    <!-- ===== 关卡结算界面 ===== -->
+    <div id="screen-level-result" class="screen">
         <div class="container">
-            <div class="result-card">
-                <div class="result-header">
-                    <div class="result-icon" id="result-icon">🏆</div>
-                    <h2 class="result-title" id="result-title">挑战完成！</h2>
+            <div class="level-result-card">
+                <div class="result-banner" id="level-result-banner">
+                    <div class="result-icon">🏆</div>
+                    <h2>关卡通过！</h2>
                 </div>
 
-                <div class="score-circle">
-                    <svg viewBox="0 0 200 200">
-                        <circle class="score-bg" cx="100" cy="100" r="85"/>
-                        <circle class="score-fill" id="score-circle" cx="100" cy="100" r="85"/>
-                    </svg>
-                    <div class="score-value">
-                        <span id="final-score">0</span>
-                        <small>分</small>
+                <div class="stars-display" id="stars-result">
+                    <span class="star">⭐</span>
+                    <span class="star">⭐</span>
+                    <span class="star">⭐</span>
+                </div>
+
+                <div class="level-stats">
+                    <div class="stat-row">
+                        <span>正确回答</span>
+                        <span id="stat-correct">0/0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>获得经验</span>
+                        <span id="stat-exp">+0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>获得金币</span>
+                        <span id="stat-coins">+0</span>
                     </div>
                 </div>
 
-                <div class="result-stats">
-                    <div class="stat">
-                        <span class="stat-value" id="correct-count">0</span>
-                        <span class="stat-label">答对</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-value" id="wrong-count">0</span>
-                        <span class="stat-label">答错</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-value" id="accuracy">0%</span>
-                        <span class="stat-label">正确率</span>
-                    </div>
-                </div>
-
-                <div class="result-rank" id="result-rank">
-                    <!-- 评级将通过JS动态生成 -->
-                </div>
-
-                <div class="result-message" id="result-message">
-                    <!-- 鼓励语将通过JS动态生成 -->
+                <div class="reward-items" id="reward-items">
+                    <!-- 奖励道具 -->
                 </div>
 
                 <div class="result-actions">
-                    <button class="btn-restart" onclick="restartGame()">
-                        🔄 再来一次
-                    </button>
-                    <button class="btn-review" onclick="reviewAnswers()">
-                        📖 查看解析
-                    </button>
+                    <button class="btn-secondary" onclick="goToLevels()">返回关卡</button>
+                    <button class="btn-primary" id="btn-next-level" onclick="nextLevel()">下一关</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 解析界面 -->
-    <div id="review-screen" class="screen">
+    <!-- ===== 游戏结束界面 ===== -->
+    <div id="screen-gameover" class="screen">
         <div class="container">
-            <div class="review-header">
-                <h2>📝 答案解析</h2>
-                <button class="btn-back" onclick="goToResult()">← 返回结果</button>
+            <div class="gameover-card">
+                <div class="gameover-icon">💀</div>
+                <h2>任务失败</h2>
+                <p>网络世界陷入了危机...</p>
+                <div class="gameover-actions">
+                    <button class="btn-primary" onclick="retryLevel()">重新挑战</button>
+                    <button class="btn-secondary" onclick="goToLevels()">返回关卡</button>
+                </div>
             </div>
-            <div class="review-list" id="review-list">
-                <!-- 解析内容将通过JS动态生成 -->
+        </div>
+    </div>
+
+    <!-- ===== 最终胜利界面 ===== -->
+    <div id="screen-victory" class="screen">
+        <div class="container">
+            <div class="victory-card">
+                <div class="victory-fireworks"></div>
+                <div class="victory-icon">👑</div>
+                <h2>恭喜通关！</h2>
+                <p>你成功守护了网络世界！</p>
+
+                <div class="final-stats">
+                    <div class="final-stat">
+                        <span class="final-stat-value" id="final-stars">0</span>
+                        <span class="final-stat-label">总星星</span>
+                    </div>
+                    <div class="final-stat">
+                        <span class="final-stat-value" id="final-coins">0</span>
+                        <span class="final-stat-label">总金币</span>
+                    </div>
+                </div>
+
+                <div class="achievements" id="achievements">
+                    <!-- 成就列表 -->
+                </div>
+
+                <div class="victory-actions">
+                    <button class="btn-primary" onclick="goToLevels()">继续收集星星</button>
+                </div>
             </div>
         </div>
     </div>
