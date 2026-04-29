@@ -56,7 +56,7 @@
             <div class="start-features">
                 <div class="feature">
                     <span class="feature-icon">🏰</span>
-                    <span class="feature-text">5大关卡</span>
+                    <span class="feature-text">8大关卡</span>
                 </div>
                 <div class="feature">
                     <span class="feature-icon">👾</span>
@@ -71,6 +71,13 @@
                     <span class="feature-text">成就系统</span>
                 </div>
             </div>
+
+            <div class="start-modes">
+                <button class="btn-secondary btn-mode" onclick="startDailyChallenge()">
+                    <span class="btn-icon">📅</span>
+                    <span class="btn-text">每日挑战</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -84,6 +91,17 @@
                     <span class="stat-item">⭐ <span id="stars-display">0</span></span>
                     <span class="stat-item">💰 <span id="coins-display">0</span></span>
                 </div>
+            </div>
+
+            <div class="levels-actions">
+                <button class="btn-secondary btn-action" onclick="startDailyChallenge()">
+                    <span class="btn-icon">📅</span>
+                    <span class="btn-text">每日挑战</span>
+                </button>
+                <button class="btn-secondary btn-action" onclick="showShopScreen()">
+                    <span class="btn-icon">🛒</span>
+                    <span class="btn-text">商店</span>
+                </button>
             </div>
 
             <div class="levels-grid" id="levels-grid">
@@ -142,6 +160,7 @@
 
             <!-- 战斗场景 -->
             <div class="battle-scene">
+                <div class="combo-display" id="combo-display" style="display:none;"></div>
                 <div class="battle-effects" id="battle-effects"></div>
                 <div class="battle-log" id="battle-log">
                     <p>战斗开始！</p>
@@ -239,6 +258,26 @@
                 <p>网络世界陷入了危机...</p>
                 <div class="gameover-actions">
                     <button class="btn-primary" onclick="retryLevel()">重新挑战</button>
+                    <button class="btn-secondary" onclick="goToLevels()">返回关卡</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 商店界面 ===== -->
+    <div id="screen-shop" class="screen">
+        <div class="container">
+            <div class="shop-card">
+                <div class="shop-header">
+                    <h2>道具商店</h2>
+                    <div class="shop-coins">💰 <span id="shop-coins">0</span></div>
+                </div>
+
+                <div class="shop-grid" id="shop-grid">
+                    <!-- 商品通过JS动态生成 -->
+                </div>
+
+                <div class="shop-actions">
                     <button class="btn-secondary" onclick="goToLevels()">返回关卡</button>
                 </div>
             </div>

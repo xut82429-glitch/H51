@@ -1037,6 +1037,236 @@ body {
     75% { transform: translateX(5px); }
 }
 
+/* ===== Combo Display ===== */
+.combo-display {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    animation: comboPulse 0.5s ease;
+    pointer-events: none;
+}
+
+.combo-display.combo-hot {
+    color: #ff6b6b;
+    text-shadow: 0 0 20px rgba(255, 107, 107, 0.8);
+}
+
+.combo-display.combo-super {
+    color: #ff9f43;
+    text-shadow: 0 0 25px rgba(255, 159, 67, 0.8);
+    font-size: 28px;
+}
+
+.combo-display.combo-mega {
+    color: #ee5a24;
+    text-shadow: 0 0 30px rgba(238, 90, 36, 0.8);
+    font-size: 32px;
+    animation: comboMega 0.3s ease infinite alternate;
+}
+
+@keyframes comboPulse {
+    0% { transform: translateX(-50%) scale(1.5); opacity: 0; }
+    50% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+    100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+@keyframes comboMega {
+    0% { transform: translateX(-50%) scale(1); }
+    100% { transform: translateX(-50%) scale(1.1); }
+}
+
+/* Combo Effect */
+.combo-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 200;
+    animation: comboEffectAnim 1.5s ease forwards;
+    pointer-events: none;
+}
+
+.combo-count {
+    display: block;
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--gold);
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.9);
+}
+
+.combo-name {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    color: #ff6b6b;
+    text-shadow: 0 0 15px rgba(255, 107, 107, 0.8);
+    margin-top: 5px;
+}
+
+@keyframes comboEffectAnim {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    20% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    80% { opacity: 1; transform: translate(-50%, -60%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -70%) scale(0.8); }
+}
+
+/* ===== Start Modes ===== */
+.start-modes {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-mode {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 25px;
+    font-size: 15px;
+}
+
+/* ===== Levels Actions ===== */
+.levels-actions {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    justify-content: center;
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 25px;
+    font-size: 15px;
+}
+
+/* ===== Shop Screen ===== */
+.shop-card {
+    background: var(--glass);
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.shop-header h2 {
+    font-size: 28px;
+    font-weight: 900;
+}
+
+.shop-coins {
+    padding: 10px 20px;
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+}
+
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.shop-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.shop-item:hover {
+    border-color: var(--primary);
+    transform: translateY(-3px);
+}
+
+.shop-item-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.shop-item-name {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.shop-item-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.shop-item-count {
+    font-size: 13px;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.shop-item-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 15px;
+}
+
+.btn-buy {
+    padding: 10px 25px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.btn-buy:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+}
+
+.shop-actions {
+    display: flex;
+    justify-content: center;
+}
+
+/* ===== Daily Challenge Badge ===== */
+.level-card.daily {
+    border-color: var(--gold);
+    background: rgba(255, 215, 0, 0.05);
+}
+
+.level-card.daily:hover {
+    border-color: var(--gold);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
     .title-line1 {
