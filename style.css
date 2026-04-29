@@ -34,7 +34,11 @@ body {
     background: var(--bg-dark);
     color: var(--text);
     min-height: 100vh;
+    min-height: 100dvh;
     overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 /* ===== Background Canvas ===== */
@@ -1268,6 +1272,22 @@ body {
 }
 
 /* ===== Responsive ===== */
+/* 大屏幕平板 (1024px 以下) */
+@media (max-width: 1024px) {
+    .container {
+        max-width: 100%;
+    }
+
+    .levels-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .shop-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* 平板和小笔记本 (768px 以下) */
 @media (max-width: 768px) {
     .title-line1 {
         font-size: 30px;
@@ -1284,6 +1304,15 @@ body {
 
     .start-form input {
         max-width: 100%;
+    }
+
+    .start-features {
+        gap: 15px;
+    }
+
+    .feature {
+        padding: 8px 15px;
+        font-size: 13px;
     }
 
     .battle-status {
@@ -1313,23 +1342,56 @@ body {
 
     .skills-bar {
         flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .skill-btn {
+        padding: 8px 12px;
     }
 
     .levels-grid {
         grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
     }
 
     .level-icon {
         font-size: 36px;
     }
 
+    .level-card {
+        padding: 20px 10px;
+    }
+
     .final-stats {
         gap: 20px;
     }
+
+    .shop-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .shop-card {
+        padding: 30px 20px;
+    }
+
+    .levels-actions {
+        flex-wrap: wrap;
+    }
+
+    .btn-action {
+        flex: 1;
+        min-width: 120px;
+    }
 }
 
+/* 小手机 (480px 以下) */
 @media (max-width: 480px) {
     .container {
+        padding: 10px;
+    }
+
+    .screen {
         padding: 10px;
     }
 
@@ -1341,8 +1403,35 @@ body {
         font-size: 20px;
     }
 
-    .question-content {
+    .shield-anim {
+        width: 120px;
+        height: 120px;
+    }
+
+    .story-intro {
+        padding: 15px;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .start-form input {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+
+    .btn-primary {
+        padding: 12px 25px;
         font-size: 16px;
+    }
+
+    .btn-secondary {
+        padding: 12px 25px;
+        font-size: 14px;
+    }
+
+    .question-content {
+        font-size: 15px;
+        margin-bottom: 15px;
     }
 
     .option-btn {
@@ -1350,11 +1439,383 @@ body {
         font-size: 14px;
     }
 
+    .option-letter {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+        margin-right: 10px;
+    }
+
     .levels-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
     }
 
     .level-card {
+        padding: 15px 8px;
+    }
+
+    .level-icon {
+        font-size: 32px;
+        margin-bottom: 8px;
+    }
+
+    .level-num {
+        font-size: 12px;
+    }
+
+    .level-name {
+        font-size: 14px;
+    }
+
+    .level-stars {
+        font-size: 14px;
+    }
+
+    .levels-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .player-stats-bar {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .stat-item {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .inventory-bar {
+        padding: 15px;
+    }
+
+    .inventory-bar h3 {
+        font-size: 14px;
+    }
+
+    .battle-status {
+        padding: 10px;
+    }
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+    }
+
+    .status-name {
+        font-size: 12px;
+    }
+
+    .hp-bar {
+        height: 16px;
+    }
+
+    .energy-bar {
+        height: 12px;
+    }
+
+    .hp-text, .energy-text {
+        font-size: 10px;
+    }
+
+    .level-badge {
+        font-size: 12px;
+        padding: 4px 12px;
+    }
+
+    .round-display {
+        font-size: 11px;
+    }
+
+    .battle-scene {
+        padding: 15px;
+        min-height: 80px;
+    }
+
+    .battle-log {
+        max-height: 60px;
+        font-size: 13px;
+    }
+
+    .question-panel {
+        padding: 15px;
+    }
+
+    .question-header {
+        margin-bottom: 10px;
+    }
+
+    .question-category {
+        font-size: 11px;
+        padding: 4px 10px;
+    }
+
+    .question-timer {
+        font-size: 16px;
+    }
+
+    .shop-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .shop-item {
         padding: 15px 10px;
+    }
+
+    .shop-item-icon {
+        font-size: 32px;
+    }
+
+    .shop-item-name {
+        font-size: 14px;
+    }
+
+    .shop-item-price {
+        font-size: 16px;
+    }
+
+    .shop-header {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .shop-header h2 {
+        font-size: 24px;
+    }
+
+    .level-result-card {
+        padding: 25px 15px;
+    }
+
+    .result-banner .result-icon {
+        font-size: 48px;
+    }
+
+    .result-banner h2 {
+        font-size: 22px;
+    }
+
+    .stars-display {
+        font-size: 28px;
+        gap: 10px;
+    }
+
+    .stat-row {
+        font-size: 14px;
+    }
+
+    .result-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .result-actions .btn-primary,
+    .result-actions .btn-secondary {
+        width: 100%;
+    }
+
+    .gameover-card {
+        padding: 30px 20px;
+    }
+
+    .gameover-icon {
+        font-size: 60px;
+    }
+
+    .gameover-card h2 {
+        font-size: 26px;
+    }
+
+    .gameover-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .gameover-actions .btn-primary,
+    .gameover-actions .btn-secondary {
+        width: 100%;
+    }
+
+    .victory-card {
+        padding: 30px 20px;
+    }
+
+    .victory-icon {
+        font-size: 60px;
+    }
+
+    .victory-card h2 {
+        font-size: 28px;
+    }
+
+    .final-stat-value {
+        font-size: 28px;
+    }
+
+    .victory-actions {
+        flex-direction: column;
+    }
+
+    .victory-actions .btn-primary {
+        width: 100%;
+    }
+
+    .combo-count {
+        font-size: 36px;
+    }
+
+    .combo-name {
+        font-size: 16px;
+    }
+
+    .combo-display {
+        font-size: 20px;
+    }
+
+    .combo-display.combo-super {
+        font-size: 22px;
+    }
+
+    .combo-display.combo-mega {
+        font-size: 26px;
+    }
+
+    .skill-name {
+        font-size: 10px;
+    }
+}
+
+/* 超小屏幕 (360px 以下) */
+@media (max-width: 360px) {
+    .title-line1 {
+        font-size: 20px;
+    }
+
+    .title-line2 {
+        font-size: 18px;
+    }
+
+    .shield-anim {
+        width: 100px;
+        height: 100px;
+    }
+
+    .levels-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .level-card {
+        padding: 12px 6px;
+    }
+
+    .level-icon {
+        font-size: 28px;
+    }
+
+    .level-name {
+        font-size: 13px;
+    }
+
+    .shop-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .btn-mode,
+    .btn-action {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+}
+
+/* 横屏模式优化 */
+@media (max-height: 500px) and (orientation: landscape) {
+    .screen {
+        align-items: flex-start;
+        padding-top: 10px;
+    }
+
+    .container {
+        padding: 5px 10px;
+    }
+
+    .battle-status {
+        margin-bottom: 10px;
+        padding: 8px;
+    }
+
+    .battle-scene {
+        min-height: 60px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .battle-log {
+        max-height: 40px;
+    }
+
+    .question-panel {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .question-content {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .skills-bar {
+        gap: 6px;
+    }
+
+    .skill-btn {
+        padding: 6px 10px;
+    }
+
+    .skill-icon {
+        font-size: 18px;
+    }
+
+    .skill-name {
+        font-size: 9px;
+    }
+}
+
+/* 高DPI屏幕优化 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .shield-svg {
+        filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.5));
+    }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+    .option-btn {
+        padding: 14px 18px;
+        min-height: 48px;
+    }
+
+    .skill-btn {
+        min-width: 48px;
+        min-height: 48px;
+    }
+
+    .btn-primary, .btn-secondary {
+        min-height: 48px;
+    }
+
+    .level-card {
+        min-height: 120px;
+    }
+
+    .shop-item {
+        min-height: 180px;
     }
 }
